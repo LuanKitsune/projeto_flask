@@ -1,17 +1,101 @@
-<!-- templates/quizzes.html -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Quizzes Mitológicos</title>
-</head>
-<body>
-    <h1>Quizzes Mitológicos</h1>
-    
-    <!-- Adicione quizzes aqui -->
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
     <a href="{{ url_for('home') }}">Voltar para a Página Inicial</a>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #333; 
+    color: #fff; 
+    margin: 0;
+    padding: 0;
+}
+    </style>
+</head>
+<body>
+    <div class="quiz-container" id="quiz">
+        <p id="question" class="question"></p>
+        <div id="options" class="options"></div>
+        <button id="submit">Next</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        var quiz = [
+            {
+                question: "Qual é a origem da palavra “mitologia”??",
+                options: ["Latim", "Grego", "Hebraico", "Sânscrito"],
+                answer: "Grego"
+            },
+            {
+                question: "Qual é um exemplo de uma lenda urbana moderna que é considerada parte da mitologia contemporânea?",
+                options: ["Drácula", "Slenderman", "Medusa", "Minotauro"],
+                answer: "Slenderman"
+            },
+            {
+                question: "Qual é a origem da lenda urbana do Slenderman?",
+                options: ["Fóruns da internet", "Literatura grega antiga", "Mitologia nórdica", "Contos de fadas dos irmãos Grimm"],
+                answer: "Fóruns da internet"
+            },
+            {
+                question: "A palavra “mythos”, que faz parte da origem da palavra “mitologia”, significa o quê em grego?",
+                options: ["Estudo", "História ou narrativa", "Deus", "Monstro"],
+                answer: "História ou narrativa"
+            },
+            {
+                question: "Quem é o deus do trovão na mitologia nórdica?",
+                options: ["Zeus", "Hércules", "Thor", "Loki"],
+                answer: "Thor"
+            }
+        ];
+
+        var currentQuestion = 0;
+
+        function showQuestion() {
+            var questionElement = document.getElementById('question');
+            var optionsElement = document.getElementById('options');
+            var submitButton = document.getElementById('submit');
+
+            questionElement.textContent = quiz[currentQuestion].question;
+            optionsElement.innerHTML = '';
+            for (var i = 0; i < quiz[currentQuestion].options.length; i++) {
+                var option = document.createElement('div');
+                option.innerHTML = '<input type="radio" name="option" value="' + quiz[currentQuestion].options[i] + '"> ' + quiz[currentQuestion].options[i];
+                optionsElement.appendChild(option);
+            }
+
+            submitButton.textContent = currentQuestion < quiz.length - 1 ? 'Próxima' : 'Fim';
+        }
+
+        document.getElementById('submit').addEventListener('click', function() {
+            var selectedOption = document.querySelector('input[name=option]:checked');
+            if (!selectedOption) {
+                alert('Por favor, selecione uma resposta!');
+                return;
+            }
+
+            var resultElement = document.getElementById('result');
+            if (selectedOption.value === quiz[currentQuestion].answer) {
+                resultElement.textContent = 'Questão ' + (currentQuestion + 1) + ': Correto!';
+            } else {
+                resultElement.textContent = 'Questão ' + (currentQuestion + 1) + ': Errado! A resposta correcta é ' + quiz[currentQuestion].answer;
+            }
+
+            currentQuestion++;
+            if (currentQuestion < quiz.length) {
+                showQuestion();
+            } else {
+                document.getElementById('submit').style.display = 'none';
+            }
+        });
+
+        showQuestion();
+    </script>
+    
 </body>
 </html>
