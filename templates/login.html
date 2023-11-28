@@ -18,17 +18,15 @@
               <span class="card-title">Login</span>
               <form class="login-form">
                 <div class="input-field">
-                  <i class="material-icons prefix">email</i>
                   <label for="email" class="active">Email:</label>
                   <input type="email" id="email" value="{{ email }}" onchange="setEmail(this.value)" />
                 </div>
                 <div class="input-field">
-                  <i class="material-icons prefix">lock</i>
-                  <label for="password" class="active">Password:</label>
+                  <label for="password" class="active">Senha:</label>
                   <input type="password" id="password" value="{{ password }}" onchange="setPassword(this.value)" />
                 </div>
                 <button class="btn waves-effect waves-light red" type="button" onclick="handleLogin()">
-                  Login
+                  <a href="{{ url_for('home') }}"class="button-link">Entrar</a>
                 </button>
                 <!-- Botão do Gmail -->
                 <a href="actionLoginGoogle" class="btn red darken-4">
