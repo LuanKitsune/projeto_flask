@@ -14,13 +14,16 @@ def mythology():
 def quizzes():
     return render_template('quizzes.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html') 
+
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
         senha = request.form['senha']
-
         return redirect(url_for('sucesso'))
 
     return render_template('cadastro.html')
