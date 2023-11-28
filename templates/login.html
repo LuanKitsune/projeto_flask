@@ -1,0 +1,51 @@
+<!-- Seu HTML atual -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-style.css') }}">
+    <!-- Se necessário -->
+</head>
+<body>
+  <div class="grey darken-3">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6 offset-m3">
+          <div class="card white-text">
+            <div class="card-content">
+              <span class="card-title">Login</span>
+              <form class="login-form">
+                <div class="input-field">
+                  <i class="material-icons prefix">email</i>
+                  <label for="email" class="active">Email:</label>
+                  <input type="email" id="email" value="{{ email }}" onchange="setEmail(this.value)" />
+                </div>
+                <div class="input-field">
+                  <i class="material-icons prefix">lock</i>
+                  <label for="password" class="active">Password:</label>
+                  <input type="password" id="password" value="{{ password }}" onchange="setPassword(this.value)" />
+                </div>
+                <button class="btn waves-effect waves-light red" type="button" onclick="handleLogin()">
+                  Login
+                </button>
+                <!-- Botão do Gmail -->
+                <a href="actionLoginGoogle" class="btn red darken-4">
+                  <i class="fab fa-google left"></i>
+                  Gmail
+                </a>
+                <!-- Botão do Facebook -->
+                <a href="#!" class="btn blue darken-4" >
+                  <i class="fab fa-facebook left"></i>
+                  Facebook
+                </a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
